@@ -2,9 +2,6 @@
 
 ### 📊 Proyecto final – Nivel Explorador: Análisis de Datos  
 **Línea de investigación:** Transición Energética Justa  
-**Autor:** Daniel Hoyos  
-**Institución:** Talento Tech – Universidad de Antioquia / Universidad de Caldas  
-**Fecha:** Octubre 2025  
 
 ---
 
