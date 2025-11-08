@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Movilidad Eléctrica{% endblock %}
+
+{% block content %}
+<!-- Barra de filtros -->
+<form class="row g-2 align-items-end mb-3" method="get" action="/">
+  <div class="col-auto">
+    <label for="anio" class="form-label mb-0">Año</label>
+    <select class="form-select" id="anio" name="anio">
+      <option value="">Último disponible</option>
+      {% for y in years %}
+        <option value="{{ y }}" {% if anio_selected==y %}selected{% endif %}>{{ y }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Aplicar</button>
+    {% if anio_selected %}
+      <a class="btn btn-outline-secondary" href="/">Limpiar</a>
+    {% endif %}
+  </div>
+</form>
+<!-- FILA 1 -->
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="chart-card">
+      <div class="chart-title">Evolución nacional EV/HEV</div>
+      {% if evolucion %}
+        {{ evolucion|safe }}
+      {% else %}
+        <div class="text-muted">No hay datos para la evolución.</div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-card">
+      <div class="chart-title">Top-10 departamentos EV/HEV</div>
+      {% if top10 %}
+        {{ top10|safe }}
+      {% else %}
+        <div class="text-muted">No hay datos para Top-10.</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- FILA 2 -->
+<div class="row g-4 mt-1">
+  <div class="col-lg-6">
+    <div class="chart-card">
+      <div class="chart-title">PIB per cápita vs adopción</div>
+      {% if pib_vs_adopcion %}
+        {{ pib_vs_adopcion|safe }}
+      {% else %}
+        <div class="text-muted">No hay datos para esta relación.</div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-card">
+      <div class="chart-title">Densidad vs adopción</div>
+      {% if densidad_vs_adopcion %}
+        {{ densidad_vs_adopcion|safe }}
+      {% else %}
+        <div class="text-muted">No hay datos para esta relación.</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- FILA 3: Coroplético full-width -->
+<div class="row g-4 mt-1">
+  <div class="col-12">
+    <div class="chart-card">
+      <div class="chart-title">Adopción EV+HEV por departamento (coroplético)</div>
+      {% if mapa_coropletico %}
+        {{ mapa_coropletico|safe }}
+      {% else %}
+        <div class="text-muted">No se encontró el GeoJSON o no hay datos.</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- FILA 4: Estaciones (opcional) -->
+<div class="row g-4 mt-1">
+  <div class="col-12">
+    <div class="chart-card">
+      <div class="chart-title">Estaciones de carga EPM – Antioquia</div>
+      {% if mapa_estaciones %}
+        {{ mapa_estaciones|safe }}
+      {% else %}
+        <div class="text-muted">No hay datos de estaciones o archivo ausente.</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
